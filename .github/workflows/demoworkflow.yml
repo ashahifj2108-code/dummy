@@ -1,0 +1,43 @@
+name: multiple pipelin
+on:
+  push:
+    branches:
+      - main
+      
+  schedule:
+    - cron: "0 10 * * 2,4"
+  
+  pull_request:
+    branches:
+      - main    
+
+
+jobs:
+  on-push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: push print
+        run: echo "on push"
+  
+  on-schedule:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: schedule print
+        run: echo "on schedule"
+          
+  on-workflow-dispatch:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: workflow_dispatch print
+        run: echo "workflow_dispatch"
+  
+  on-pullrequest:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: pullrequest print
+        run: echo "pullrequest printing"
+ 
