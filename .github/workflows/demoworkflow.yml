@@ -1,4 +1,4 @@
-name: multiple pipelin
+name: ci piepleine
 on:
   push:
     branches:
